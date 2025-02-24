@@ -163,7 +163,7 @@ SELECT DEPT_CODE, FLOOR(AVG(SALARY)) AS "급여 평균"
 FROM EMPLOYEE 
 WHERE SUBSTR(EMP_NO,1,1) ='8' 
 GROUP BY DEPT_CODE
-HAVING AVG(SALARY) >=4000000
+	HAVING AVG(SALARY) >=4000000
 ORDER BY DEPT_CODE ASC;
                          
 --------------------------------------------------------------------------------------------------------------                     
