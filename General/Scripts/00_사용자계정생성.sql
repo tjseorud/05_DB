@@ -21,13 +21,13 @@ ALTER USER KH14_SDK DEFAULT TABLESPACE "USERS" QUOTA 200M ON "USERS";
 GRANT CONNECT, RESOURCE, CREATE VIEW TO KH14_SDK;
 
 ---------------------------------------------------------------------------
-/*DB :공용으로 사용할 데이터를 
+/*DB -공용으로 사용할 데이터를 중복을 최소화하여 구조적모으는 곳
  * 
  *DBMS(DateBase Management System) 
  * -DB 데이터를 추출, 조작, 정의 ,제어할 수 있는 프로그램
  *
- *SQL(구조적 질의 언어)
- * -
+ *SQL(Structured Query Language, 구조적 질의 언어)
+ * -데이터를 조회, 조작, 관리하기 위해 사용하는 언어
  * 
  *DQL(Date Query Language) :데이터 질이 언어
  * -테이블에서 데이터를 조회하는 구문
@@ -43,6 +43,16 @@ GRANT CONNECT, RESOURCE, CREATE VIEW TO KH14_SDK;
  *DDL(Data Definition Language) :데이터 정의 언어
  * -객체를 만들고(CREATE), 수정하고(ALTER), 삭제하는(DROP) 구문
  *
+ *DCL(Data Control Language) :데이터 제어 언어
+ * -계정 별로 권한 제어(부여, 회수)
+ * -권한 부여 :GRANT 권한... TO 사용자명;
+ * -권한 회수 :REVOKE 권한... FROM 사용자명;
+ * 
+ * ROLE(역할) 	:권한의 묶음
+ * -CONNECT 	:접속 권한
+ * -RESOURCE	:기본 객체 8개 생성 권한
+ *
+ *---------------------------------------------------------------------------
  *[SELECT 작성법]
  * 5)SELECT 컬럼명|함수식|리터럴|서브쿼리(스칼라) [AS "별칭"]
  * 1)FROM 테이블명|서브쿼리(인라인뷰)+ JOIN
@@ -99,7 +109,7 @@ GRANT CONNECT, RESOURCE, CREATE VIEW TO KH14_SDK;
  * CLOB			:문자 데이터 저장(MAX 4GB)
  * 
  *[제약조건]
- * -조건에 맞는 데이터만 유지하기 위해 컬럼에 설정하는 제약
+ * -정의 :조건에 맞는 데이터만 유지하기 위해 컬럼에 설정하는 제약
  *  ->데이터 무결성 확보(중복X, NULL X, 신뢰할 수 있는 데이터)
  * 
  * [NOT NULL]
@@ -124,6 +134,7 @@ GRANT CONNECT, RESOURCE, CREATE VIEW TO KH14_SDK;
  *    부모 <-(참조)- 자식
  *  -테이블간의 관계(Relationship)가 형성됨
  *   ->테이블간의 JOIN 가능한 컬럼이 특정지어짐
+ * 	-컬럼/테이블 레벨 모두 설정 가능
  * 
  *  -삭제옵션
  *   1)ON DELETE SET NULL
@@ -139,12 +150,16 @@ GRANT CONNECT, RESOURCE, CREATE VIEW TO KH14_SDK;
  * 
  *---------------------------------------------------------------------------
  *[ALTER] :객체의 구조를 변경하는 구문
- * [ALTER TABLE 구문]
- *  -
+ *
+ *[ALTER TABLE 구문]
+ * -컬럼(추가/수정/삭제)
+ * -제약조건(추가/삭제)
+ * -이름변경(테이블, 컬럼, 제약조건)
  * 
  *[DROP] :객체의 구조를 삭제하는 구문
- * [DROP TABLE 테이블명 CASCADE CONSTRAINTS]
- *  -삭제되는 테이블과 관계를 맺기 위한 제약조건(FK)모두 삭제
+ *
+ *[DROP TABLE 테이블명 CASCADE CONSTRAINTS]
+ * -삭제되는 테이블과 관계를 맺기 위한 제약조건(FK)모두 삭제
  * */
 
 
